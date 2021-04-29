@@ -1,0 +1,4 @@
+Options All -indexes
+RewriteEngine On
+RewriteBase /flight-reservation/
+RewriteRule ^([-a-zA-Z0-9]+)$ index.php?page=$1
