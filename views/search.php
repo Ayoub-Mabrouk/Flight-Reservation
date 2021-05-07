@@ -1,12 +1,13 @@
 <?php
-if (isset($_SESSION['user_logged']) && $_SESSION['user_logged'] == true && !isset($_SESSION['admin'])) {
-} else {
+if(isset($_SESSION['user_logged']) && $_SESSION['user_logged']==true && !isset($_SESSION['admin'])){
+ if(isset($_POST['search'])){
+    $data = new FlightController();
+    $flights = $data->searchflight($_POST['search']);
+}
+}
+else {
   Redirect::to('login');
 }
-$data = new FlightController();
-$flights = $data->getAllFlights();
-
-
 
 ?>
 <!DOCTYPE html>
@@ -24,18 +25,17 @@ $flights = $data->getAllFlights();
 <body>
 
   <?php include './views/includes/header.php' ?>
-
   <body>
-    <div class="container m-2">
-      <h1><?php echo $_SESSION['first_name'] . ' ' . $_SESSION['last_name'] ?></h1>
-    </div>
+  <div class="container m-2">
+  <h1><?php echo $_SESSION['first_name'].' '.$_SESSION['last_name'] ?></h1>
+  </div>
 
 
-    <div class="container">
-      <div class="row justify-content-center ">
+  <div class="container">
+    <div class="row justify-content-center ">
 
-        <?php foreach ($flights as $flight) { ?>
-
+      <?php foreach ($flights as $flight) { ?>
+        
           <div class="card m-5" style="width: 18rem;">
             <div class="card-body">
               <h5 class="card-title">Airline: <?= $flight['airline'] ?></h5>
@@ -48,27 +48,28 @@ $flights = $data->getAllFlights();
             </ul>
             <div class="card-body">
               <form method="post" action="reserve">
+
                 <input type="hidden" name="flight_id" value="<?= $flight['flight_id'] ?>">
                 <button name="submit" class="btn btn-outline-primary">Reserve</button>
-                <span class="form-check">
-                  <input class="form-check-input" type="checkbox" name="roundtrip" value="roundtrip" id="flexCheckDefault">
-                  <label class="form-check-label" for="flexCheckDefault">
-                    round-trip
-                  </label>
-                </span>
-                <input name="passenger_count" type="number" class="form-control" placeholder="Passenger's count" id="validationCustom05">
+<span class="form-check">
+  <input class="form-check-input" type="checkbox" name="roundtrip" value="roundtrip" id="flexCheckDefault">
+  <label class="form-check-label" for="flexCheckDefault">
+  round-trip
+  </label>
+</span>
+                <input name="passenger_count" type="number" class="form-control" placeholder="Passenger's count" id="validationCustom05" >
 
 
               </form>
             </div>
           </div>
+        
+      <?php } ?>
 
-        <?php } ?>
+    </div>
+    <div>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 
-      </div>
-      <div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-
-  </body>
+</body>
 
 </html>
