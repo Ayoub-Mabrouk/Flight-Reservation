@@ -1,4 +1,9 @@
 <?php
+if (isset($_SESSION['user_logged']) && $_SESSION['user_logged'] == true && !isset($_SESSION['admin'])) {
+} else {
+  Redirect::to('login');
+}
+
 require_once './autoload.php';
 require_once './controllers/UserController.php';
 $roundtrip = (isset($_POST['roundtrip']) && $_POST['roundtrip'] == 'roundtrip') ? true : false;

@@ -1,4 +1,8 @@
 <?php
+if (isset($_SESSION['user_logged']) && $_SESSION['user_logged'] == true && !isset($_SESSION['admin'])) {
+} else {
+  Redirect::to('login');
+}
 $user = new UserController();
 $myreservations = $user->myreservations();
 

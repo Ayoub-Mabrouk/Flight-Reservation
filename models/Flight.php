@@ -39,4 +39,10 @@ class Flight
         $stmt->execute();
         $stmt = null;
     }
+    static public function allreservations(){
+        $stmt = Db::connect()->prepare('SELECT u.first_name, u.last_name, airline,depart,destination,f_Date,price,capacity from flight f,reservation r,user u where f.flight_id=r.flight_id and u.user_id=r.user_id');
+        $stmt->execute();
+        return $stmt->fetchAll();
+        $stmt = null;
+    }
 }

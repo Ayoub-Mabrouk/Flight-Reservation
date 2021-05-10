@@ -1,14 +1,14 @@
 <?php
-if(isset($_SESSION['logged']) && $_SESSION['logged']==true ){
+if (isset($_SESSION['logged']) && $_SESSION['logged'] == true) {
     Redirect::to('home');
 }
-if(isset($_POST['submit'])){
-    if($_POST['role']=="user"){
-        $login_user= new UserController();
+if (isset($_POST['submit'])) {
+    if ($_POST['role'] == "user") {
+        $login_user = new UserController();
         $login_user->auth();
-    }else{
-        $login_admin= new AdminController();
-    $login_admin->auth();
+    } else {
+        $login_admin = new AdminController();
+        $login_admin->auth();
     }
 }
 ?>
@@ -21,8 +21,18 @@ if(isset($_POST['submit'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <style>
+        #intro {
+            /* transform: scaleX(-1); */
+            background-image: url("./images/loginbg.jpg");
+            height: 100vh;
+            background-position: center;
+            background-size: cover;
+        }
+    </style>
 </head>
 
+<div id="intro" class="bg-image shadow-2-strong">
 
     <div class="container  ">
         <div style="height: 100vh" class="row col-xxl-12 align-items-center justify-content-center">
@@ -50,7 +60,7 @@ if(isset($_POST['submit'])){
                     </select>
                     <!-- 2 column grid layout for inline styling -->
                     <div class="row mb-4">
-                       
+
 
                         <div class="col d-flex justify-content-center">
                             <!-- Simple link -->
@@ -64,7 +74,9 @@ if(isset($_POST['submit'])){
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 </body>
 
 </html>

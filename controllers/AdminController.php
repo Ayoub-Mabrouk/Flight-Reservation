@@ -21,7 +21,7 @@ class AdminController
                         $_SESSION['email'] = $admin->email;
                         $_SESSION['first_name'] = $admin->first_name;
                         $_SESSION['last_name'] = $admin->last_name;
-                        Redirect::to('dashboard');
+                        Redirect::to('allflights');
                     } else {
                         Redirect::to('login');
                     }
@@ -33,6 +33,7 @@ class AdminController
     public function delete_flight($flight_id){
         $fligth= Flight::delete_flight($flight_id);
     }
+    
     public function edit_flight($flight_id,$airline,$depart,$destination,$date,$price,$capacity){
         $flight=Flight::edit_flight($flight_id,$airline,$depart,$destination,$date,$price,$capacity);
     }

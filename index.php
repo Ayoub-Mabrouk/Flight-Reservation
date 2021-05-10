@@ -2,7 +2,7 @@
 require_once './autoload.php';
 $home = new HomeController();
 
-$pages = ['home','edit-flight','reservemulti','allflights','register','addflight','search', 'admin','dashboard', 'myreservations', 'login', 'np', 'logout', 'reserve', 'add', 'update','cancel', 'delete-flight'];
+$pages = ['home','edit-flight','allreservations','reservemulti','allflights','register','addflight','search', 'admin','dashboard', 'myreservations', 'login', 'np', 'logout', 'reserve', 'add', 'update','cancel', 'delete-flight'];
 if (isset($_GET['page'])) {
     if (in_array($_GET['page'], $pages)) {
         $page = $_GET['page'];

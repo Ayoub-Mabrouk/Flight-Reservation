@@ -1,4 +1,8 @@
 <?php
+if (isset($_SESSION['admin']) && $_SESSION['admin'] == true && !isset($_SESSION['user_logged'])) {
+} else {
+  Redirect::to('login');
+}
 $flight = new FlightController();
 $allflights = $flight->getAllFlights();
 
@@ -16,6 +20,7 @@ $allflights = $flight->getAllFlights();
 </head>
 
 <body>
+<?php include './views/includes/admin_header.php' ?>
     <div class="container">
         <div class="col-xxl-10 col-md-8 mx-auto d-flex justify-content-end">
             <button type="button" data-bs-toggle="modal" data-bs-target="#addModal" class="btn btn-success">Add Flight</button>
@@ -95,7 +100,7 @@ $allflights = $flight->getAllFlights();
                         </div>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Date:</label>
-                            <input type="datetime-local" name="date" class="form-control date" id="recipient-name">
+                            <input type="datetime-local" name="date" class="form-control date" id="date">
                         </div>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Price:</label>
@@ -124,8 +129,8 @@ $allflights = $flight->getAllFlights();
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form method="POST" action="addflight">
-                <div class="modal-body">
-                   
+                    <div class="modal-body">
+
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Airline:</label>
                             <input type="text" name="airline" class="form-control" id="recipient-name">
@@ -150,13 +155,13 @@ $allflights = $flight->getAllFlights();
                             <label for="recipient-name" class="col-form-label">Capacity:</label>
                             <input type="number" name="capacity" class="form-control" id="recipient-name">
                         </div>
-                        
-                
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" name="submit" class="btn btn-primary">Add</button>
-                </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" name="submit" class="btn btn-primary">Add</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -172,11 +177,10 @@ $allflights = $flight->getAllFlights();
         [...editbuttons].map(element => element.addEventListener('click', function(event) {
 
             linedata = this.parentElement.parentElement.children;
-
             document.querySelector('.airline').value = linedata[0].innerHTML;
             document.querySelector('.depart').value = linedata[1].innerHTML;
             document.querySelector('.destination').value = linedata[2].innerHTML;
-            document.querySelector('.date').value = linedata[3].innerHTML;
+            document.querySelector('.date').value = linedata[3].innerHTML.replace(" ", "T").slice(0, -3);
             document.querySelector('.price').value = linedata[4].innerHTML;
             document.querySelector('.capacity').value = linedata[5].innerHTML;
             document.getElementById('hidden_input_edit').value = this.parentElement.getAttribute('value');

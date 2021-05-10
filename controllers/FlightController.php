@@ -8,4 +8,8 @@ class FlightController {
 $flights= Flight::searchflight($place);
 return $flights;
     }
+    public function allreservations(){
+        $reservations= Flight::allreservations();
+        return $reservations;
+    }
 }
